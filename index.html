@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('img').click(function() {
+            console.log(this);
+            var curImg= $(this).attr('src'); //grab the src attribute
+            var nxtImg = $(this).attr('data-alt-src');
+            console.log(curImg, nxtImg);
+            $(this).attr('src', nxtImg); // value of src is going to be nextimg
+            $(this).attr('data-alt-src', curImg);
+        });
+        // now generate somefun buttons! new buttons dynamic content
+        $('#genbutts').click(function () {
+            $('body').append('<button class="newbutt">Newly generated button!</button>')
+        });
+        // won't work, because newbutt doesn't exist. need to get updates from the documetn... see below
+        // $('.newbutt').click(function () {
+        $(document).on('click','.newbutt',function() { // search your entire document to search for elements on page for 'newbutt class
+        // for dynamic content
+            alert('you clicked a butt!'); //minimize how many .on s you use cuz it will search each time
+            // the whole document and slow the machine down
+        });
+    });
+    </script>
+    <style media="screen">
+    img {
+        display: block;
+        height: 80px;
+        width: 150px;
+        margin-bottom:1px;
+    }
+    </style>
+
+    <body>
+        <img src="gc1.png" data-alt-src="tc1.png" />
+        <img src="gc2.png" data-alt-src="tc2.png" />
+        <img src="gc3.png" data-alt-src="tc3.png" />
+        <img src="gc4.png" data-alt-src="tc4.png" />
+        <button id="genbutts">Generate somebuttons</button>
+    </body>
+</html>
